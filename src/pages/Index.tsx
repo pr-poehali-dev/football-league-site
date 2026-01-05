@@ -20,6 +20,16 @@ interface Match {
   minute?: number;
 }
 
+interface ScheduleMatch {
+  time: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeScore?: number;
+  awayScore?: number;
+  status: MatchStatus;
+  minute?: number;
+}
+
 interface Player {
   name: string;
   firstName: string;
@@ -44,6 +54,145 @@ interface TeamStats {
   goalDiff: number;
   points: number;
 }
+
+const scheduleData: Record<string, Record<string, ScheduleMatch[]>> = {
+  'Север': {
+    'A': [
+      { time: '00:00', homeTeam: 'Murmansk', awayTeam: 'Helsinki', status: 'upcoming' },
+      { time: '01:00', homeTeam: 'Stockholm', awayTeam: 'Bergen', status: 'upcoming' },
+      { time: '02:00', homeTeam: 'Murmansk', awayTeam: 'Stockholm', status: 'upcoming' },
+      { time: '03:00', homeTeam: 'Helsinki', awayTeam: 'Bergen', status: 'upcoming' },
+      { time: '04:00', homeTeam: 'Murmansk', awayTeam: 'Bergen', status: 'upcoming' },
+      { time: '05:00', homeTeam: 'Helsinki', awayTeam: 'Stockholm', status: 'upcoming' }
+    ],
+    'B': [
+      { time: '06:00', homeTeam: 'Glasgow', awayTeam: 'Narvik', status: 'upcoming' },
+      { time: '07:00', homeTeam: 'Edinburgh', awayTeam: 'Riga', status: 'upcoming' },
+      { time: '08:00', homeTeam: 'Glasgow', awayTeam: 'Edinburgh', status: 'upcoming' },
+      { time: '09:00', homeTeam: 'Narvik', awayTeam: 'Riga', status: 'upcoming' },
+      { time: '10:00', homeTeam: 'Glasgow', awayTeam: 'Riga', status: 'upcoming' },
+      { time: '11:00', homeTeam: 'Narvik', awayTeam: 'Edinburgh', status: 'upcoming' }
+    ],
+    'C': [
+      { time: '12:00', homeTeam: 'Arkhangelsk', awayTeam: 'Cork', status: 'upcoming' },
+      { time: '13:00', homeTeam: 'Yakutsk', awayTeam: 'Tallinn', status: 'upcoming' },
+      { time: '14:00', homeTeam: 'Arkhangelsk', awayTeam: 'Yakutsk', status: 'upcoming' },
+      { time: '15:00', homeTeam: 'Cork', awayTeam: 'Tallinn', status: 'upcoming' },
+      { time: '16:00', homeTeam: 'Arkhangelsk', awayTeam: 'Tallinn', status: 'upcoming' },
+      { time: '17:00', homeTeam: 'Cork', awayTeam: 'Yakutsk', status: 'upcoming' }
+    ],
+    'D': [
+      { time: '18:00', homeTeam: 'Winnipeg', awayTeam: 'Ottawa', status: 'upcoming' },
+      { time: '19:00', homeTeam: 'Norilsk', awayTeam: 'Aarhus', status: 'upcoming' },
+      { time: '20:00', homeTeam: 'Winnipeg', awayTeam: 'Norilsk', status: 'upcoming' },
+      { time: '21:00', homeTeam: 'Ottawa', awayTeam: 'Aarhus', status: 'upcoming' },
+      { time: '22:00', homeTeam: 'Winnipeg', awayTeam: 'Aarhus', status: 'upcoming' },
+      { time: '23:00', homeTeam: 'Ottawa', awayTeam: 'Norilsk', status: 'upcoming' }
+    ]
+  },
+  'Запад': {
+    'A': [
+      { time: '00:00', homeTeam: 'Chicago', awayTeam: 'Turin', status: 'upcoming' },
+      { time: '01:00', homeTeam: 'Cadiz', awayTeam: 'Kingston', status: 'upcoming' },
+      { time: '02:00', homeTeam: 'Mexico', awayTeam: 'Austin', status: 'upcoming' },
+      { time: '03:00', homeTeam: 'Tucson', awayTeam: 'Reno', status: 'upcoming' },
+      { time: '04:00', homeTeam: 'Toronto', awayTeam: 'Kursk', status: 'upcoming' },
+      { time: '05:00', homeTeam: 'Minsk', awayTeam: 'Essen', status: 'upcoming' }
+    ],
+    'B': [
+      { time: '06:00', homeTeam: 'Cologne', awayTeam: 'Verdun', status: 'upcoming' },
+      { time: '07:00', homeTeam: 'Dakar', awayTeam: 'Tunis', status: 'upcoming' },
+      { time: '08:00', homeTeam: 'Chicago', awayTeam: 'Cadiz', status: 'upcoming' },
+      { time: '09:00', homeTeam: 'Kingston', awayTeam: 'Mexico', status: 'upcoming' },
+      { time: '10:00', homeTeam: 'Austin', awayTeam: 'Tucson', status: 'upcoming' },
+      { time: '11:00', homeTeam: 'Reno', awayTeam: 'Toronto', status: 'upcoming' }
+    ],
+    'C': [
+      { time: '12:00', homeTeam: 'Kursk', awayTeam: 'Minsk', status: 'upcoming' },
+      { time: '13:00', homeTeam: 'Essen', awayTeam: 'Cologne', status: 'upcoming' },
+      { time: '14:00', homeTeam: 'Verdun', awayTeam: 'Dakar', status: 'upcoming' },
+      { time: '15:00', homeTeam: 'Tunis', awayTeam: 'Chicago', status: 'upcoming' },
+      { time: '16:00', homeTeam: 'Turin', awayTeam: 'Kingston', status: 'upcoming' },
+      { time: '17:00', homeTeam: 'Cadiz', awayTeam: 'Mexico', status: 'upcoming' }
+    ],
+    'D': [
+      { time: '18:00', homeTeam: 'Austin', awayTeam: 'Reno', status: 'upcoming' },
+      { time: '19:00', homeTeam: 'Tucson', awayTeam: 'Toronto', status: 'upcoming' },
+      { time: '20:00', homeTeam: 'Kursk', awayTeam: 'Essen', status: 'upcoming' },
+      { time: '21:00', homeTeam: 'Minsk', awayTeam: 'Cologne', status: 'upcoming' },
+      { time: '22:00', homeTeam: 'Verdun', awayTeam: 'Tunis', status: 'upcoming' },
+      { time: '23:00', homeTeam: 'Dakar', awayTeam: 'Turin', status: 'upcoming' }
+    ]
+  },
+  'Юг': {
+    'A': [
+      { time: '00:00', homeTeam: 'Krasnodar', awayTeam: 'Cairo', status: 'upcoming' },
+      { time: '01:00', homeTeam: 'Damascus', awayTeam: 'Aden', status: 'upcoming' },
+      { time: '02:00', homeTeam: 'Hanoi', awayTeam: 'Melbourne', status: 'upcoming' },
+      { time: '03:00', homeTeam: 'Lima', awayTeam: 'Belem', status: 'upcoming' },
+      { time: '04:00', homeTeam: 'Palermo', awayTeam: 'Baku', status: 'upcoming' },
+      { time: '05:00', homeTeam: 'Sevastopol', awayTeam: 'Tampa', status: 'upcoming' }
+    ],
+    'B': [
+      { time: '06:00', homeTeam: 'Plymouth', awayTeam: 'Makhachkala', status: 'upcoming' },
+      { time: '07:00', homeTeam: 'Lahore', awayTeam: 'Muscat', status: 'upcoming' },
+      { time: '08:00', homeTeam: 'Krasnodar', awayTeam: 'Damascus', status: 'upcoming' },
+      { time: '09:00', homeTeam: 'Aden', awayTeam: 'Hanoi', status: 'upcoming' },
+      { time: '10:00', homeTeam: 'Melbourne', awayTeam: 'Lima', status: 'upcoming' },
+      { time: '11:00', homeTeam: 'Belem', awayTeam: 'Palermo', status: 'upcoming' }
+    ],
+    'C': [
+      { time: '12:00', homeTeam: 'Baku', awayTeam: 'Sevastopol', status: 'upcoming' },
+      { time: '13:00', homeTeam: 'Tampa', awayTeam: 'Plymouth', status: 'upcoming' },
+      { time: '14:00', homeTeam: 'Makhachkala', awayTeam: 'Lahore', status: 'upcoming' },
+      { time: '15:00', homeTeam: 'Muscat', awayTeam: 'Krasnodar', status: 'upcoming' },
+      { time: '16:00', homeTeam: 'Cairo', awayTeam: 'Aden', status: 'upcoming' },
+      { time: '17:00', homeTeam: 'Damascus', awayTeam: 'Hanoi', status: 'upcoming' }
+    ],
+    'D': [
+      { time: '18:00', homeTeam: 'Melbourne', awayTeam: 'Belem', status: 'upcoming' },
+      { time: '19:00', homeTeam: 'Lima', awayTeam: 'Palermo', status: 'upcoming' },
+      { time: '20:00', homeTeam: 'Baku', awayTeam: 'Tampa', status: 'upcoming' },
+      { time: '21:00', homeTeam: 'Sevastopol', awayTeam: 'Plymouth', status: 'upcoming' },
+      { time: '22:00', homeTeam: 'Makhachkala', awayTeam: 'Muscat', status: 'upcoming' },
+      { time: '23:00', homeTeam: 'Lahore', awayTeam: 'Cairo', status: 'upcoming' }
+    ]
+  },
+  'Восток': {
+    'A': [
+      { time: '00:00', homeTeam: 'Tokyo', awayTeam: 'Seoul', status: 'upcoming' },
+      { time: '01:00', homeTeam: 'Shanghai', awayTeam: 'Manila', status: 'upcoming' },
+      { time: '02:00', homeTeam: 'Osaka', awayTeam: 'Vladivostok', status: 'upcoming' },
+      { time: '03:00', homeTeam: 'Khabarovsk', awayTeam: 'Brisbane', status: 'upcoming' },
+      { time: '04:00', homeTeam: 'Tagum', awayTeam: 'Singapore', status: 'upcoming' },
+      { time: '05:00', homeTeam: 'Hong Kong', awayTeam: 'Dili', status: 'upcoming' }
+    ],
+    'B': [
+      { time: '06:00', homeTeam: 'Beijing', awayTeam: 'Cebu', status: 'upcoming' },
+      { time: '07:00', homeTeam: 'Canberra', awayTeam: 'Magadan', status: 'upcoming' },
+      { time: '08:00', homeTeam: 'Tokyo', awayTeam: 'Shanghai', status: 'upcoming' },
+      { time: '09:00', homeTeam: 'Manila', awayTeam: 'Osaka', status: 'upcoming' },
+      { time: '10:00', homeTeam: 'Vladivostok', awayTeam: 'Khabarovsk', status: 'upcoming' },
+      { time: '11:00', homeTeam: 'Brisbane', awayTeam: 'Tagum', status: 'upcoming' }
+    ],
+    'C': [
+      { time: '12:00', homeTeam: 'Singapore', awayTeam: 'Hong Kong', status: 'upcoming' },
+      { time: '13:00', homeTeam: 'Dili', awayTeam: 'Beijing', status: 'upcoming' },
+      { time: '14:00', homeTeam: 'Cebu', awayTeam: 'Canberra', status: 'upcoming' },
+      { time: '15:00', homeTeam: 'Magadan', awayTeam: 'Tokyo', status: 'upcoming' },
+      { time: '16:00', homeTeam: 'Seoul', awayTeam: 'Manila', status: 'upcoming' },
+      { time: '17:00', homeTeam: 'Shanghai', awayTeam: 'Osaka', status: 'upcoming' }
+    ],
+    'D': [
+      { time: '18:00', homeTeam: 'Vladivostok', awayTeam: 'Brisbane', status: 'upcoming' },
+      { time: '19:00', homeTeam: 'Khabarovsk', awayTeam: 'Tagum', status: 'upcoming' },
+      { time: '20:00', homeTeam: 'Singapore', awayTeam: 'Dili', status: 'upcoming' },
+      { time: '21:00', homeTeam: 'Hong Kong', awayTeam: 'Beijing', status: 'upcoming' },
+      { time: '22:00', homeTeam: 'Cebu', awayTeam: 'Magadan', status: 'upcoming' },
+      { time: '23:00', homeTeam: 'Canberra', awayTeam: 'Seoul', status: 'upcoming' }
+    ]
+  }
+};
 
 const allDivisions = {
   'Север': {
@@ -310,6 +459,45 @@ const StandingsTable = ({ standings, onTeamClick }: { standings: TeamStats[], on
   </div>
 );
 
+const getMatchStatus = (matchTime: string, dateOffset: number): { status: MatchStatus, homeScore?: number, awayScore?: number, minute?: number } => {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+  
+  const [matchHour] = matchTime.split(':').map(Number);
+  
+  if (dateOffset === -1) {
+    return {
+      status: 'finished',
+      homeScore: Math.floor(Math.random() * 4),
+      awayScore: Math.floor(Math.random() * 4)
+    };
+  }
+  
+  if (dateOffset === 1) {
+    return { status: 'upcoming' };
+  }
+  
+  if (matchHour < currentHour || (matchHour === currentHour && currentMinute > 50)) {
+    return {
+      status: 'finished',
+      homeScore: Math.floor(Math.random() * 4),
+      awayScore: Math.floor(Math.random() * 4)
+    };
+  }
+  
+  if (matchHour === currentHour && currentMinute <= 50) {
+    return {
+      status: 'live',
+      homeScore: Math.floor(Math.random() * 4),
+      awayScore: Math.floor(Math.random() * 4),
+      minute: currentMinute
+    };
+  }
+  
+  return { status: 'upcoming' };
+};
+
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [liveMatches] = useState(generateLiveMatches());
@@ -317,10 +505,27 @@ const Index = () => {
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
   const [teamPlayers, setTeamPlayers] = useState<Player[]>([]);
   const [statsDate, setStatsDate] = useState(0);
+  const [scheduleDate, setScheduleDate] = useState(0);
+  const [selectedDivision, setSelectedDivision] = useState<string | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
 
   const handleTeamClick = (team: string) => {
     setSelectedTeam(team);
     setTeamPlayers(generateTeamPlayers(team));
+  };
+
+  const getScheduleMatches = (): ScheduleMatch[] => {
+    if (!selectedDivision || !selectedGroup) return [];
+    
+    const matches = scheduleData[selectedDivision]?.[selectedGroup] || [];
+    
+    return matches.map(match => {
+      const matchStatus = getMatchStatus(match.time, scheduleDate);
+      return {
+        ...match,
+        ...matchStatus
+      };
+    });
   };
 
   return (
@@ -423,11 +628,133 @@ const Index = () => {
 
         {activeSection === 'schedule' && (
           <section>
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Расписание</h2>
-            <div className="text-center py-12">
-              <Icon name="Calendar" size={64} className="mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground">Раздел в разработке</p>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-foreground">Расписание</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant={scheduleDate === -1 ? 'default' : 'outline'}
+                  onClick={() => setScheduleDate(-1)}
+                  className={scheduleDate === -1 ? 'bg-accent' : ''}
+                >
+                  Вчера
+                </Button>
+                <Button
+                  variant={scheduleDate === 0 ? 'default' : 'outline'}
+                  onClick={() => setScheduleDate(0)}
+                  className={scheduleDate === 0 ? 'bg-accent' : ''}
+                >
+                  Сегодня
+                </Button>
+                <Button
+                  variant={scheduleDate === 1 ? 'default' : 'outline'}
+                  onClick={() => setScheduleDate(1)}
+                  className={scheduleDate === 1 ? 'bg-accent' : ''}
+                >
+                  Завтра
+                </Button>
+              </div>
             </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {Object.keys(scheduleData).map((division) => (
+                <Card
+                  key={division}
+                  className={`p-6 cursor-pointer transition-all ${
+                    selectedDivision === division
+                      ? 'bg-accent border-accent'
+                      : 'bg-card border-border hover:border-accent'
+                  }`}
+                  onClick={() => {
+                    setSelectedDivision(division);
+                    setSelectedGroup(null);
+                  }}
+                >
+                  <div className="text-center">
+                    <Icon 
+                      name={
+                        division === 'Север' ? 'Snowflake' :
+                        division === 'Запад' ? 'Sunset' :
+                        division === 'Юг' ? 'Sun' :
+                        'Sunrise'
+                      } 
+                      size={48} 
+                      className={selectedDivision === division ? 'text-white mx-auto mb-3' : 'text-accent mx-auto mb-3'}
+                    />
+                    <h3 className={`text-xl font-bold ${selectedDivision === division ? 'text-white' : 'text-foreground'}`}>
+                      {division}
+                    </h3>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {selectedDivision && (
+              <Card className="p-6 bg-card border-border mb-6">
+                <h3 className="text-xl font-bold mb-4 text-foreground">Выберите группу</h3>
+                <div className="flex gap-2">
+                  {Object.keys(scheduleData[selectedDivision]).map((group) => (
+                    <Button
+                      key={group}
+                      variant={selectedGroup === group ? 'default' : 'outline'}
+                      className={selectedGroup === group ? 'bg-accent' : ''}
+                      onClick={() => setSelectedGroup(group)}
+                    >
+                      Группа {group}
+                    </Button>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {selectedDivision && selectedGroup && (
+              <Card className="p-6 bg-card border-border">
+                <h3 className="text-2xl font-bold mb-6 text-foreground">
+                  {selectedDivision} - Группа {selectedGroup}
+                </h3>
+                <div className="grid gap-4">
+                  {getScheduleMatches().map((match, index) => (
+                    <Card key={index} className="p-4 bg-background border-border hover:border-accent transition-colors">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-medium text-muted-foreground">{match.time}</span>
+                        {match.status === 'live' && (
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-accent rounded-full live-pulse" />
+                            <span className="text-accent text-sm font-medium">{match.minute}'</span>
+                          </div>
+                        )}
+                        {match.status === 'finished' && (
+                          <Badge variant="secondary" className="text-xs">ЗАВЕРШЕН</Badge>
+                        )}
+                        {match.status === 'upcoming' && (
+                          <Badge variant="outline" className="text-xs">ПРЕДСТОЯЩИЙ</Badge>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <p className="text-foreground font-semibold text-lg">{match.homeTeam}</p>
+                          <p className="text-foreground font-semibold text-lg mt-2">{match.awayTeam}</p>
+                        </div>
+                        
+                        {match.status !== 'upcoming' && (
+                          <div className="text-right">
+                            <p className="text-2xl font-bold text-foreground">{match.homeScore}</p>
+                            <p className="text-2xl font-bold text-foreground mt-2">{match.awayScore}</p>
+                          </div>
+                        )}
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {!selectedDivision && (
+              <div className="text-center py-12">
+                <Icon name="Calendar" size={64} className="mx-auto mb-4 text-muted-foreground" />
+                <p className="text-muted-foreground">Выберите дивизион для просмотра расписания</p>
+              </div>
+            )}
           </section>
         )}
 
